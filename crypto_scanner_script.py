@@ -218,18 +218,7 @@ def calculate_wad(df, last_strength):
     Returns:
         pd.Series: A Series with the WAD calculation for each row.
     """
-    true_high = np.maximum(df['high'], df['close'].shift(1))
-    true_low = np.minimum(df['low'], df['close'].shift(1))
-    mom = df['close'].diff()
-
-    gain = np.where(mom > 0, df['close'] - true_low,
-                    np.where(mom < 0, df['close'] - true_high, 0))
-
-    # Insert the last WAD to continue the calculation.
-    if len(gain) > 0 and len(last_strength) > 0:
-        gain[0] = float(last_strength.iloc[0])
-
-    wad = np.cumsum(gain)
+    #! This function has been hidden for confidentiality reasons.
 
     return wad
 
@@ -250,13 +239,7 @@ def calculate_sma_wad(df, period, df_strength):
         np.ndarray: An array with the SMA values for the WAD.
 
     """
-    # Adjust the latest data storage in the tables and the data from the closed cancles to sync.
-    df_sma = pd.merge(df_strength[['datetime', 'strength']], df[[
-                      'datetime', 'wad']], on='datetime', how='outer')
-    df_sma['wad'] = df_sma['wad'].fillna(df_sma['strength'])
-    df_sma.drop('strength', axis=1, inplace=True)
-
-    df_sma['sma'] = df_sma['wad'].rolling(window=period).mean()
+    #! This function has been hidden for confidentiality reasons.
 
     return df_sma.iloc[-(len(df)):]['sma'].values
 
@@ -464,10 +447,8 @@ def strong_buy_tokens(row_data_signal):
     Returns:
         list: all the tokens with a strong buy flag.
     """
-    return intersection_token_entries(
-        string_to_array(row_data_signal['Cross_Up_25']),
-        string_to_array(row_data_signal['Cross_Up_57'])
-    )
+    #! This function has been hidden for confidentiality reasons.
+    return 
 
 
 def medium_buy_tokens(row_data_signal, strong_result):
@@ -480,13 +461,8 @@ def medium_buy_tokens(row_data_signal, strong_result):
     Returns:
         list: all the tokens with a medium buy flag.
     """
-    return subtract_token_entries(
-        intersection_token_entries(
-            string_to_array(row_data_signal['Above_25']),
-            string_to_array(row_data_signal['Cross_Up_57'])
-        ),
-        strong_result
-    )
+    #! This function has been hidden for confidentiality reasons.
+    return
 
 
 def first_call_buy_tokens(row_data_signal):
@@ -498,10 +474,8 @@ def first_call_buy_tokens(row_data_signal):
     Returns:
         list: all the tokens with a first call buy flag.
     """
-    return intersection_token_entries(
-        string_to_array(row_data_signal['Above_25']),
-        string_to_array(row_data_signal['Below_57'])
-    )
+    #! This function has been hidden for confidentiality reasons.
+    return 
 
 
 def old_buy_tokens(row_data_signal, strong_result, medium_result):
@@ -533,10 +507,8 @@ def strong_sell_tokens(row_data_signal):
     Returns:
         list: all the tokens with a strong sell flag.
     """
-    return intersection_token_entries(
-        string_to_array(row_data_signal['Cross_Down_25']),
-        string_to_array(row_data_signal['Cross_Down_57'])
-    )
+    #! This function has been hidden for confidentiality reasons.
+    return
 
 
 def medium_sell_tokens(row_data_signal, strong_result):
@@ -549,13 +521,8 @@ def medium_sell_tokens(row_data_signal, strong_result):
     Returns:
         list: all the tokens with a medium sell flag.
     """
-    return subtract_token_entries(
-        intersection_token_entries(
-            string_to_array(row_data_signal['Below_25']),
-            string_to_array(row_data_signal['Cross_Down_57'])
-        ),
-        strong_result
-    )
+    #! This function has been hidden for confidentiality reasons.
+    return
 
 
 def first_call_sell_tokens(row_data_signal):
@@ -567,10 +534,8 @@ def first_call_sell_tokens(row_data_signal):
     Returns:
         list: all the tokens with a first call sell flag.
     """
-    return intersection_token_entries(
-        string_to_array(row_data_signal['Below_25']),
-        string_to_array(row_data_signal['Above_57'])
-    )
+    #! This function has been hidden for confidentiality reasons.
+    return
 
 
 def old_sell_tokens(row_data_signal, strong_result, medium_result):
