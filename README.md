@@ -1,4 +1,4 @@
-## 📊 Crypto Scanner Demo: Exploración de Criptomonedas
+## 📊 Demo: Exploración de Criptomonedas
 
 ### 📌 Introducción
 
